@@ -24,3 +24,8 @@ yarn-error.log*
 
 package-lock.json
 package.json
+
+.env
+__pycache__/
+db/spotify.db
+node_modules/

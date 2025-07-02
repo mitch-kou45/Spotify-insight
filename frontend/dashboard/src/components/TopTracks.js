@@ -1,19 +1,20 @@
-// src/components/TopTracks.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-function TopTracks() {
+function TopTracks({ refreshTrigger }) {
   const [tracks, setTracks] = useState([]);
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:5000/api/top-tracks")
-      .then(res => setTracks(res.data))
-      .catch(err => console.error(err));
-  }, []);
+    axios.get("http://127.0.0.1:5000/api/top-tracks", {
+      withCredentials: true
+    })
+    .then(res => setTracks(res.data))
+    .catch(err => console.error(err));
+  }, [refreshTrigger]); // trigger re-fetch on change
 
   return (
     <div>
-      <h2>Top 5 Tracks</h2>
+      <h2>Top Tracks</h2>
       <table>
         <thead>
           <tr>
@@ -23,8 +24,8 @@ function TopTracks() {
           </tr>
         </thead>
         <tbody>
-          {tracks.map((track, index) => (
-            <tr key={index}>
+          {tracks.map((track, i) => (
+            <tr key={i}>
               <td>{track.name}</td>
               <td>{track.artist}</td>
               <td>{track.play_count}</td>

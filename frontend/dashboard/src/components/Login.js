@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
 function Login() {
   const handleLogin = () => {
-    window.location.href = "http://localhost:5000/";
-};
+    window.location.href = "http://127.0.0.1:5000/";
+  };
 
   return (
     <div>

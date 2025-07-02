@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-function TopArtists() {
+function TopArtists({ refreshTrigger }) {
   const [artists, setArtists] = useState([]);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/top-artists")
-      .then(res => setArtists(res.data))
-      .catch(err => setError("Failed to fetch top artists"));
-  }, []);
-
-  if (error) return <p>{error}</p>;
+    axios.get("http://127.0.0.1:5000/api/top-artists", {
+      withCredentials: true
+    })
+    .then(res => setArtists(res.data))
+    .catch(err => console.error(err));
+  }, [refreshTrigger]); // runs whenever refreshTrigger changes
 
   return (
     <div>
-      <h2>Top 5 Artists</h2>
+      <h2>Top Artists</h2>
       <table>
         <thead>
           <tr>
